@@ -1,6 +1,5 @@
 <?php
-namespace aleynikov\sndmart;
-
+namespace aleynikov\sndmart\Entity;
 
 class Message implements ArrayableInterface
 {

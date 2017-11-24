@@ -1,5 +1,5 @@
 <?php
-namespace aleynikov\sndmart;
+namespace aleynikov\sndmart\Exception;
 
 class MethodNotAllowedException extends \Exception
 {

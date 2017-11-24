@@ -1,39 +1,33 @@
 <?php
-namespace aleynikov\sndmart;
+namespace aleynikov\sndmart\Api;
 
 use yii\httpclient\Client;
+use aleynikov\sndmart\Exception\InvalidResponseException;
 
-class ClientApi
+class ClientPartnerApi
 {
     /**
      *
      */
-    const API_URL = 'https://api.sndmart.com/';
+    const API_URL = 'https://partner.sndmart.com/api/';
 
     /**
-     * @var
+     * @var string
      */
-    private $key;
+    private $accessToken;
 
     /**
-     * @var
-     */
-    private $secret;
-
-    /**
-     * @var
+     * @var Client
      */
     private $client;
 
     /**
-     * ClientApi constructor.
-     * @param $key
-     * @param $secret
+     * ClientPartnerApi constructor.
+     * @param $accessToken
      */
-    public function __construct($key, $secret)
+    public function __construct($accessToken)
     {
-        $this->key = $key;
-        $this->secret = $secret;
+        $this->accessToken = $accessToken;
         $this->client = new Client([
             'baseUrl'   => self::API_URL,
             'transport' => 'yii\httpclient\CurlTransport',
@@ -52,11 +46,11 @@ class ClientApi
             ->setMethod('post')
             ->setUrl($endpoint)
             ->setFormat(Client::FORMAT_JSON)
-            ->addHeaders(['content-type' => 'application/json'])
-            ->setData(array_merge([
-                'key' => $this->key,
-                'secret' => $this->secret,
-            ], $data));
+            ->addHeaders([
+                'content-type' => 'application/json',
+                'access-token' => $this->accessToken,
+            ])
+            ->setData($data);
 
         $response = $request->send();
 
@@ -68,13 +62,15 @@ class ClientApi
     }
 
     /**
-     * @param Message $message
+     * @param Contact $contact
+     * @param $emailListId
      * @return mixed
      */
-    public function sendNewMessage(Message $message)
+    public function addNewContact(Contact $contact, $emailListId)
     {
-        return $this->_sendRequest('send', [
-            'message' => $message->toArray(),
+        return $this->_sendRequest('rest/email-list/contacts/add', [
+            'emailListId' => $emailListId,
+            'contacts'    => [$contact],
         ]);
     }
 }

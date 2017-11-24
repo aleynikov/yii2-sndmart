@@ -2,12 +2,15 @@
 namespace aleynikov\sndmart;
 
 use \yii\base\Component;
+use Api\{ClientApi, ClientPartnerApi};
+use Entity\{Message, TriggeredEmail, Contact};
+use Exception\MethodNotAllowedException;
 
 /**
  * Class SmartSender
  * @package aleynikov\sndmart
  *
- *
+ * @package
  */
 class SmartSender extends Component
 {
