@@ -3,7 +3,8 @@
     "description": "The SmartSender (transaction email platform) integration for the Yii framework",
     "type": "yii2-extension",
     "require": {
-        "yiisoft/yii2": "~2.0.0"
+        "yiisoft/yii2": "~2.0.0",
+        "yiisoft/yii2-httpclient": "~2.0.0"
     },
     "license": "BSD-3-Clause",
     "authors": [
@@ -12,5 +13,10 @@
             "email": "max.aleyinikov@gmail.com"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "aleynikov\\sndmart\\": "src/"
+        }
+    }
 }
