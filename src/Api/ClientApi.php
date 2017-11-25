@@ -65,7 +65,7 @@ class ClientApi
             throw new InvalidResponseException('Incorrect service response');
         }
 
-        return $response->getData();
+        return new ResponseApi($response->getData());
     }
 
     /**

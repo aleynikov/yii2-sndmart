@@ -1,16 +1,17 @@
 <?php
 namespace aleynikov\sndmart;
 
+use aleynikov\sndmart\Api\ClientApi;
+use aleynikov\sndmart\Api\ClientPartnerApi;
+use aleynikov\sndmart\Api\ResponseApi;
 use \yii\base\Component;
-use Api\{ClientApi, ClientPartnerApi};
-use Entity\{Message, TriggeredEmail, Contact};
-use Exception\MethodNotAllowedException;
 
 /**
  * Class SmartSender
  * @package aleynikov\sndmart
  *
- * @package
+ * @method ResponseApi sendNewMessage() sendNewMessage(Message $message)
+ * @method ResponseApi addNewContact() addNewContact(Contact $contact, $emailListId)
  */
 class SmartSender extends Component
 {
@@ -25,6 +26,16 @@ class SmartSender extends Component
     private $clientPartnerApi;
 
     /**
+     * @var string
+     */
+    public $key;
+
+    /**
+     * @var string
+     */
+    public $secret;
+
+    /**
      * SmartSender constructor.
      * @param array $config
      */
@@ -37,6 +48,7 @@ class SmartSender extends Component
     {
         $this->clientApi        = new ClientApi($this->key, $this->secret);
         $this->clientPartnerApi = new ClientPartnerApi($this->secret);
+
         parent::init();
     }
 
