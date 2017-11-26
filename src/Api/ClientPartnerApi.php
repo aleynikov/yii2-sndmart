@@ -54,7 +54,7 @@ class ClientPartnerApi
 
         $response = $request->send();
 
-        if (!$response->isOk()) {
+        if (!$response->isOk) {
             throw new InvalidResponseException('Incorrect service response');
         }
 

@@ -1,7 +1,7 @@
 <?php
 namespace aleynikov\sndmart\Entity;
 
-class TriggeredEmail implements ArrayableInterface
+class TriggeredEmail extends Entity
 {
     /**
      * @var

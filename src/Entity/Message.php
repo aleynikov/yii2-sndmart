@@ -1,7 +1,7 @@
 <?php
 namespace aleynikov\sndmart\Entity;
 
-class Message implements ArrayableInterface
+class Message extends Entity
 {
     /**
      * @var string

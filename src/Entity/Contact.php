@@ -1,7 +1,7 @@
 <?php
 namespace aleynikov\sndmart\Entity;
 
-class Contact implements ArrayableInterface
+class Contact extends Entity
 {
     /**
      * @var

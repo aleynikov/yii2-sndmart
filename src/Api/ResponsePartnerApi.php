@@ -2,17 +2,17 @@
 namespace aleynikov\sndmart\Api;
 
 /**
- * Class ResponseApi
+ * Class ResponsePartnerApi
  * @package aleynikov\sndmart\Api
  */
-class ResponseApi extends ResponseAbstract
+class ResponsePartnerApi extends ResponseAbstract
 {
     /**
      * @return bool
      */
     public function isSuccess()
     {
-        return $this->_data['result'] == 1;
+        return $this->_data['result'] == 'true';
     }
 
     /**
@@ -20,6 +20,7 @@ class ResponseApi extends ResponseAbstract
      */
     public function getError()
     {
-        return $this->_data['error'];
+        return $this->_data['error_stack'];
     }
+
 }

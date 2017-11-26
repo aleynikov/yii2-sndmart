@@ -4,6 +4,7 @@ namespace aleynikov\sndmart;
 use aleynikov\sndmart\Api\ClientApi;
 use aleynikov\sndmart\Api\ClientPartnerApi;
 use aleynikov\sndmart\Api\ResponseApi;
+use aleynikov\sndmart\Entity\EntityFactory;
 use \yii\base\Component;
 
 /**
@@ -53,27 +54,12 @@ class SmartSender extends Component
     }
 
     /**
-     * @return Message
+     * @param $name
+     * @return Entity\Entity
      */
-    public static function createMessageInstance()
+    public function createEntity($name)
     {
-        return new Message();
-    }
-
-    /**
-     * @return TriggeredEmail
-     */
-    public static function createTriggeredEmailInstance()
-    {
-        return new TriggeredEmail();
-    }
-
-    /**
-     * @return Contact
-     */
-    public static function createContactInstance()
-    {
-        return new Contact();
+        return EntityFactory::create($name);
     }
 
     /**
