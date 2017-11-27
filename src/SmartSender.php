@@ -5,16 +5,16 @@ use aleynikov\sndmart\Api\ClientApi;
 use aleynikov\sndmart\Api\ClientPartnerApi;
 use aleynikov\sndmart\Api\ResponseApi;
 use aleynikov\sndmart\Api\ResponsePartnerApi;
+use aleynikov\sndmart\Entity\ContactEntity;
 use aleynikov\sndmart\Entity\EntityFactory;
-use aleynikov\sndmart\Exception\MethodNotAllowedException;
+use aleynikov\sndmart\Entity\MessageEntity;
+use aleynikov\sndmart\Entity\TriggeredEmailEntity;
 use \yii\base\Component;
 
 /**
  * Class SmartSender
  * @package aleynikov\sndmart
  *
- * @method ResponseApi sendNewMessage() sendNewMessage(MessageEntity $message)
- * @method ResponsePartnerApi addNewContact() addNewContact(ContactEntity $contact, $emailListId)
  */
 class SmartSender extends Component
 {
@@ -65,27 +65,72 @@ class SmartSender extends Component
     }
 
     /**
-     * @param string $name
-     * @param array $params
-     * @return mixed
-     * @throws MethodNotAllowedException
+     * @return Entity\MessageEntity
      */
-    public function __call($name, $params)
+    public function createMessageEntity()
     {
-        if (method_exists($this->clientApi, $name)) {
-            return call_user_func_array(
-                [$this->clientApi, $name],
-                $params
-            );
-        }
+        return $this->createEntity('message');
+    }
 
-        if (method_exists($this->clientPartnerApi, $name)) {
-            return call_user_func_array(
-                [$this->clientPartnerApi, $name],
-                $params
-            );
-        }
+    /**
+     * @return Entity\ContactEntity
+     */
+    public function createContactEntity()
+    {
+        return $this->createEntity('contact');
+    }
 
-        throw new MethodNotAllowedException('Method not found.');
+    /**
+     * @return Entity\TriggeredEmailEntity
+     */
+    public function createTriggeredEmailEntity()
+    {
+        return $this->createEntity('triggeredEmail');
+    }
+
+    /**
+     * @param MessageEntity $message
+     * @return ResponseApi
+     */
+    public function sendNewMessage(MessageEntity $message)
+    {
+        return $this->clientApi->sendRequest('send', [
+            'message' => $message->toArray(),
+        ]);
+    }
+
+    /**
+     * @param ContactEntity $contact
+     * @param $emailListId
+     * @return ResponsePartnerApi
+     */
+    public function addNewContact(ContactEntity $contact, $emailListId)
+    {
+        return $this->clientPartnerApi->sendRequest('rest/email-list/contacts/add', [
+            'emailListId' => $emailListId,
+            'contacts'    => [$contact],
+        ]);
+    }
+
+    /**
+     * @param ContactEntity $contact
+     * @param $emailListId
+     * @return ResponsePartnerApi
+     */
+    public function removeContact(ContactEntity $contact, $emailListId)
+    {
+        return $this->clientPartnerApi->sendRequest('rest/email-list/contacts/remove', [
+            'emailListId' => $emailListId,
+            'emails'      => [$contact->toArray()['email']],
+        ]);
+    }
+
+    /**
+     * @param TriggeredEmailEntity $triggeredEmail
+     * @return ResponsePartnerApi
+     */
+    public function sendTriggeredEmail(TriggeredEmailEntity $triggeredEmail)
+    {
+        return $this->clientPartnerApi->sendRequest('api/rest/mailer/send', $triggeredEmail->toArray());
     }
 }

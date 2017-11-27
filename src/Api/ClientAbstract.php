@@ -15,7 +15,6 @@ abstract class ClientAbstract
      */
     protected $client;
 
-
     /**
      * ClientAbstract constructor.
      */
@@ -28,9 +27,9 @@ abstract class ClientAbstract
     }
 
     /**
-     * @param $uri
+     * @param $endpoint
      * @param array $data
      * @return mixed
      */
-    abstract protected function _sendRequest($uri, array $data);
+    abstract public function sendRequest($endpoint, array $data);
 }
