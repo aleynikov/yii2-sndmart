@@ -40,10 +40,10 @@ class TriggeredEmailEntity implements EntityInterface
     }
 
     /**
-     * @param $contact
+     * @param ContactEntity $contact
      * @return $this
      */
-    public function setContact($contact)
+    public function setContact(ContactEntity $contact)
     {
         $this->contact = $contact;
 
@@ -91,7 +91,7 @@ class TriggeredEmailEntity implements EntityInterface
     public function toArray() {
         return [
             'emailListId' => $this->emailListId,
-            'contact'     => $this->contact,
+            'contact'     => $this->contact->toArray()['email'],
             'templateId'  => $this->templateId,
             'tags'        => $this->tags,
             'variables'   => $this->variables,

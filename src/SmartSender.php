@@ -131,6 +131,6 @@ class SmartSender extends Component
      */
     public function sendTriggeredEmail(TriggeredEmailEntity $triggeredEmail)
     {
-        return $this->clientPartnerApi->sendRequest('api/rest/mailer/send', $triggeredEmail->toArray());
+        return $this->clientPartnerApi->sendRequest('rest/mailer/send', $triggeredEmail->toArray());
     }
 }
