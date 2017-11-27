@@ -108,7 +108,7 @@ class SmartSender extends Component
     {
         return $this->clientPartnerApi->sendRequest('rest/email-list/contacts/add', [
             'emailListId' => $emailListId,
-            'contacts'    => [$contact],
+            'contacts'    => [$contact->toArray()],
         ]);
     }
 
