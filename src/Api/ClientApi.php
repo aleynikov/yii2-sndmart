@@ -41,7 +41,7 @@ class ClientApi extends ClientAbstract
      */
     public function sendRequest($endpoint, array $data)
     {
-        $request = $this->client->createRequest()
+        $request = $this->createRequest()
             ->setMethod('post')
             ->setUrl($endpoint)
             ->setFormat(self::FORMAT_JSON)

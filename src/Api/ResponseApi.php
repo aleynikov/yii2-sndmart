@@ -8,14 +8,6 @@ namespace aleynikov\sndmart\Api;
 class ResponseApi extends ResponseAbstract
 {
     /**
-     * @return bool
-     */
-    public function isSuccess()
-    {
-        return $this->_data['result'] == 1;
-    }
-
-    /**
      * @return mixed
      */
     public function getError()

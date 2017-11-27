@@ -34,7 +34,10 @@ abstract class ResponseAbstract
     /**
      * @return bool
      */
-    abstract public function isSuccess();
+    public function isSuccess()
+    {
+        return (bool) $this->_data['result'];
+    }
 
     /**
      * @return mixed
