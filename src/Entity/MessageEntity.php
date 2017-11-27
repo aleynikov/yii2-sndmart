@@ -1,7 +1,7 @@
 <?php
 namespace aleynikov\sndmart\Entity;
 
-class Message extends Entity
+class MessageEntity implements EntityInterface
 {
     /**
      * @var string
@@ -129,19 +129,25 @@ class Message extends Entity
     }
 
     /**
-     * @param mixed $text
+     * @param $text
+     * @return $this
      */
     public function setText($text)
     {
         $this->text = $text;
+
+        return $this;
     }
 
     /**
-     * @param mixed $html
+     * @param $html
+     * @return $this
      */
     public function setHtml($html)
     {
         $this->html = $html;
+
+        return $this;
     }
 
     /**

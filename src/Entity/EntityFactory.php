@@ -9,17 +9,17 @@ class EntityFactory
 {
     /**
      * @param $name
-     * @return Entity
+     * @return ContactEntity|MessageEntity|TriggeredEmailEntity
      */
     public static function create($name)
     {
         switch($name) {
             case 'message':
-                return new Message();
-            case 'constact':
-                return new Contact();
+                return new MessageEntity();
+            case 'contact':
+                return new ContactEntity();
             case 'triggeredEmail':
-                return new TriggeredEmail();
+                return new TriggeredEmailEntity();
         }
     }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace aleynikov\sndmart\Entity;
 
-class TriggeredEmail extends Entity
+class TriggeredEmailEntity implements EntityInterface
 {
     /**
      * @var
@@ -72,10 +72,10 @@ class TriggeredEmail extends Entity
     public function toArray() {
         return [
             'emailListId' => $this->emailListId,
-            'contact' => $this->contact,
-            'templateId' => $this->templateId,
-            'tags' => $this->tags,
-            'variables' => $this->variables,
+            'contact'     => $this->contact,
+            'templateId'  => $this->templateId,
+            'tags'        => $this->tags,
+            'variables'   => $this->variables,
         ];
     }
 }

@@ -5,6 +5,7 @@ use aleynikov\sndmart\Api\ClientApi;
 use aleynikov\sndmart\Api\ClientPartnerApi;
 use aleynikov\sndmart\Api\ResponseApi;
 use aleynikov\sndmart\Entity\EntityFactory;
+use aleynikov\sndmart\Exception\MethodNotAllowedException;
 use \yii\base\Component;
 
 /**
@@ -55,7 +56,7 @@ class SmartSender extends Component
 
     /**
      * @param $name
-     * @return Entity\Entity
+     * @return Entity\ContactEntity|Entity\MessageEntity|Entity\TriggeredEmailEntity
      */
     public function createEntity($name)
     {
@@ -84,6 +85,6 @@ class SmartSender extends Component
             );
         }
 
-        throw new MethodNotAllowedException('Invalid call method');
+        throw new MethodNotAllowedException('Method not found.');
     }
 }

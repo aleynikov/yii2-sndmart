@@ -22,5 +22,4 @@ class ResponsePartnerApi extends ResponseAbstract
     {
         return $this->_data['error_stack'];
     }
-
 }

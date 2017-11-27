@@ -1,25 +1,21 @@
 <?php
 namespace aleynikov\sndmart\Api;
 
-use yii\httpclient\Client;
+use aleynikov\sndmart\Entity\ContactEntity;
 use aleynikov\sndmart\Exception\InvalidResponseException;
+use yii\httpclient\Client;
 
-class ClientPartnerApi
+class ClientPartnerApi extends ClientAbstract
 {
     /**
-     *
+     * @var string
      */
-    const API_URL = 'https://partner.sndmart.com/api/';
+    protected $baseUrl = 'https://partner.sndmart.com/api/';
 
     /**
      * @var string
      */
     private $accessToken;
-
-    /**
-     * @var Client
-     */
-    private $client;
 
     /**
      * ClientPartnerApi constructor.
@@ -28,10 +24,8 @@ class ClientPartnerApi
     public function __construct($accessToken)
     {
         $this->accessToken = $accessToken;
-        $this->client = new Client([
-            'baseUrl'   => self::API_URL,
-            'transport' => 'yii\httpclient\CurlTransport',
-        ]);
+
+        parent::__construct();
     }
 
     /**
@@ -58,15 +52,15 @@ class ClientPartnerApi
             throw new InvalidResponseException('Incorrect service response');
         }
 
-        return new ResponseApi($response->getData());
+        return new ResponsePartnerApi($response->getData());
     }
 
     /**
-     * @param Contact $contact
+     * @param ContactEntity $contact
      * @param $emailListId
      * @return mixed
      */
-    public function addNewContact(Contact $contact, $emailListId)
+    public function addNewContact(ContactEntity $contact, $emailListId)
     {
         return $this->_sendRequest('rest/email-list/contacts/add', [
             'emailListId' => $emailListId,

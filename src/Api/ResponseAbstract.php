@@ -5,7 +5,7 @@ namespace aleynikov\sndmart\Api;
  * Class ResponseAbstract
  * @package aleynikov\sndmart\Api
  */
-abstract class ResponseAbstract implements ResponseInterface
+abstract class ResponseAbstract
 {
     /**
      * @var mixed
@@ -30,4 +30,14 @@ abstract class ResponseAbstract implements ResponseInterface
             ? $this->_data
             : array();
     }
+
+    /**
+     * @return bool
+     */
+    abstract public function isSuccess();
+
+    /**
+     * @return mixed
+     */
+    abstract public function getError();
 }

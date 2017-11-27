@@ -1,15 +1,16 @@
 <?php
 namespace aleynikov\sndmart\Api;
 
-use yii\httpclient\Client;
+use aleynikov\sndmart\Entity\MessageEntity;
 use aleynikov\sndmart\Exception\InvalidResponseException;
+use yii\httpclient\Client;
 
-class ClientApi
+class ClientApi extends ClientAbstract
 {
     /**
-     *
+     * @var string
      */
-    const API_URL = 'https://api.sndmart.com/';
+    protected $baseUrl = 'https://api.sndmart.com/';
 
     /**
      * @var
@@ -22,11 +23,6 @@ class ClientApi
     private $secret;
 
     /**
-     * @var
-     */
-    private $client;
-
-    /**
      * ClientApi constructor.
      * @param $key
      * @param $secret
@@ -35,10 +31,8 @@ class ClientApi
     {
         $this->key = $key;
         $this->secret = $secret;
-        $this->client = new Client([
-            'baseUrl'   => self::API_URL,
-            'transport' => 'yii\httpclient\CurlTransport',
-        ]);
+
+        parent::__construct();
     }
 
     /**
@@ -69,10 +63,10 @@ class ClientApi
     }
 
     /**
-     * @param Message $message
+     * @param MessageEntity $message
      * @return mixed
      */
-    public function sendNewMessage(Message $message)
+    public function sendNewMessage(MessageEntity $message)
     {
         return $this->_sendRequest('send', [
             'message' => $message->toArray(),

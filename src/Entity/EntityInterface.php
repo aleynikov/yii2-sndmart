@@ -1,7 +1,7 @@
 <?php
 namespace aleynikov\sndmart\Entity;
 
-interface ArrayableInterface
+interface EntityInterface
 {
     public function toArray();
 }
