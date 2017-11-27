@@ -3,25 +3,15 @@ namespace aleynikov\sndmart\Api;
 
 use yii\httpclient\Client;
 
-abstract class ClientAbstract
+abstract class ClientAbstract extends Client
 {
     /**
-     * @var string
-     */
-    protected $baseUrl;
-
-    /**
-     * @var Client
-     */
-    protected $client;
-
-    /**
      * ClientAbstract constructor.
+     * @param array $config
      */
-    public function __construct()
+    public function __construct(array $config = [])
     {
-        $this->client = new Client([
-            'baseUrl'   => $this->baseUrl,
+        parent::__construct($config + [
             'transport' => 'yii\httpclient\CurlTransport',
         ]);
     }

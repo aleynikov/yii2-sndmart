@@ -1,17 +1,12 @@
 <?php
 namespace aleynikov\sndmart\Api;
 
-use aleynikov\sndmart\Entity\ContactEntity;
-use aleynikov\sndmart\Entity\TriggeredEmailEntity;
-use aleynikov\sndmart\Exception\InvalidResponseException;
-use yii\httpclient\Client;
-
 class ClientPartnerApi extends ClientAbstract
 {
     /**
      * @var string
      */
-    protected $baseUrl = 'https://partner.sndmart.com/api';
+    public $baseUrl = 'https://partner.sndmart.com/api';
 
     /**
      * @var string
@@ -19,14 +14,11 @@ class ClientPartnerApi extends ClientAbstract
     private $accessToken;
 
     /**
-     * ClientPartnerApi constructor.
-     * @param $accessToken
+     * @param string $accessToken
      */
-    public function __construct($accessToken)
+    public function setAccessToken($accessToken)
     {
         $this->accessToken = $accessToken;
-
-        parent::__construct();
     }
 
     /**
@@ -39,7 +31,7 @@ class ClientPartnerApi extends ClientAbstract
         $request = $this->client->createRequest()
             ->setMethod('post')
             ->setUrl($endpoint)
-            ->setFormat(Client::FORMAT_JSON)
+            ->setFormat(self::FORMAT_JSON)
             ->setOptions([
                 'timeout' => 5,
             ])

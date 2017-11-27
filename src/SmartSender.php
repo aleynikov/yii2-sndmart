@@ -10,6 +10,7 @@ use aleynikov\sndmart\Entity\EntityFactory;
 use aleynikov\sndmart\Entity\MessageEntity;
 use aleynikov\sndmart\Entity\TriggeredEmailEntity;
 use \yii\base\Component;
+use \Yii;
 
 /**
  * Class SmartSender
@@ -39,18 +40,20 @@ class SmartSender extends Component
     public $secret;
 
     /**
-     * SmartSender constructor.
-     * @param array $config
+     *
      */
-    public function __construct(array $config = [])
-    {
-        parent::__construct($config);
-    }
-
     public function init()
     {
-        $this->clientApi        = new ClientApi($this->key, $this->secret);
-        $this->clientPartnerApi = new ClientPartnerApi($this->secret);
+        $this->clientApi = Yii::createObject([
+            'class'  => ClientApi::class,
+            'key'    => $this->key,
+            'secret' => $this->secret,
+        ]);
+
+        $this->clientPartnerApi = Yii::createObject([
+            'class'       => ClientPartnerApi::class,
+            'accessToken' => $this->secret,
+        ]);
 
         parent::init();
     }
