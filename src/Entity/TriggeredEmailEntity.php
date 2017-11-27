@@ -29,41 +29,60 @@ class TriggeredEmailEntity implements EntityInterface
     private $variables = [];
 
     /**
-     * @param mixed $emailListId
+     * @param $emailListId
+     * @return $this
      */
     public function setEmailListId($emailListId)
     {
         $this->emailListId = $emailListId;
+
+        return $this;
     }
 
     /**
-     * @param mixed $contact
+     * @param $contact
+     * @return $this
      */
     public function setContact($contact)
     {
         $this->contact = $contact;
+
+        return $this;
     }
 
     /**
-     * @param mixed $templateId
+     * @param $templateId
+     * @return $this
      */
     public function setTemplateId($templateId)
     {
         $this->templateId = $templateId;
-    }
 
-    public function setTags($name, $value)
-    {
-        $this->tags[] = compact('name', 'value');
+        return $this;
     }
 
     /**
      * @param $name
      * @param $value
+     * @return $this
+     */
+    public function setTags($name, $value)
+    {
+        $this->tags[] = compact('name', 'value');
+
+        return $this;
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     * @return $this
      */
     public function setVariable($name, $value)
     {
         $this->variables[] = compact('name', 'value');
+
+        return $this;
     }
 
     /**

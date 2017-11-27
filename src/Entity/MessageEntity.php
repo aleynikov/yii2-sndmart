@@ -71,13 +71,13 @@ class MessageEntity implements EntityInterface
     }
 
     /**
-     * @param $name
      * @param $email
+     * @param string $name
      * @return $this
      */
-    public function setReplyTo($name, $email)
+    public function setReplyTo($email, $name = '')
     {
-        $this->replyTo[] = compact('name', 'email');
+        $this->replyTo[] = compact('email', 'name');
 
         return $this;
     }
@@ -94,13 +94,13 @@ class MessageEntity implements EntityInterface
     }
 
     /**
-     * @param $name
      * @param $email
+     * @param string $name
      * @return $this
      */
-    public function setTo($name, $email)
+    public function setTo($email, $name = '')
     {
-        $this->to[] = compact('name', 'email');
+        $this->to[] = compact('email', 'name');
 
         return $this;
     }
