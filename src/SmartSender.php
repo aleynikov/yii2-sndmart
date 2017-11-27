@@ -4,6 +4,7 @@ namespace aleynikov\sndmart;
 use aleynikov\sndmart\Api\ClientApi;
 use aleynikov\sndmart\Api\ClientPartnerApi;
 use aleynikov\sndmart\Api\ResponseApi;
+use aleynikov\sndmart\Api\ResponsePartnerApi;
 use aleynikov\sndmart\Entity\EntityFactory;
 use aleynikov\sndmart\Exception\MethodNotAllowedException;
 use \yii\base\Component;
@@ -12,8 +13,8 @@ use \yii\base\Component;
  * Class SmartSender
  * @package aleynikov\sndmart
  *
- * @method ResponseApi sendNewMessage() sendNewMessage(Message $message)
- * @method ResponseApi addNewContact() addNewContact(Contact $contact, $emailListId)
+ * @method ResponseApi sendNewMessage() sendNewMessage(MessageEntity $message)
+ * @method ResponsePartnerApi addNewContact() addNewContact(ContactEntity $contact, $emailListId)
  */
 class SmartSender extends Component
 {
