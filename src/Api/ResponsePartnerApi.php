@@ -14,4 +14,12 @@ class ResponsePartnerApi extends ResponseAbstract
     {
         return $this->_data['error_stack'];
     }
+
+    /**
+     * @return bool
+     */
+    public function isSuccess()
+    {
+        return !isset($this->_data['error_stack']);
+    }
 }
